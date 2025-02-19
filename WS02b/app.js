@@ -24,3 +24,16 @@ fs.readFile('example.txt', 'utf8', (err, data) => {
   } else
   console.log(data);
 });
+
+// Tiedostoon kirjoittaminen
+
+const fs = require('fs');
+const data = 'Tämä teksti on onnistuneesti kirjoitettu tiedostoon!';
+
+fs.writeFile('output.txt', data, 'utf8', (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  } else
+  console.log('Kirjoittaminen tiedostoon onnistui!');
+});
