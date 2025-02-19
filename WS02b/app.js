@@ -1,3 +1,4 @@
+// Axios pyyntö
 const axios = require('axios');
 const apiUrl = 'https://reqres.in/api/users?page=2';
 
@@ -11,3 +12,15 @@ const fetchData = async () => {
 };
 
 fetchData();
+
+// Tiedoston lukeminen
+
+const fs = require('fs');
+
+fs.readFile('example.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.error(err);
+    return;
+  } else
+  console.log(data);
+});
