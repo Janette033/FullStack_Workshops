@@ -1,4 +1,4 @@
-// Axios pyyntö
+
 const axios = require('axios');
 const apiUrl = 'https://reqres.in/api/users?page=2';
 
