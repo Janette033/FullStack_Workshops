@@ -36,3 +36,13 @@ fs.writeFile('output.txt', data, 'utf8', (err) => {
   } else
   console.log('Kirjoittaminen tiedostoon onnistui!');
 });
+
+// Tiedoston poisto
+
+fs.unlink('temp.txt', (err) => {
+    if (err) {
+        console.error(err);
+        return;
+    } else
+    console.log(`Tiedosto poistettu onnistuneesti!`);
+});
