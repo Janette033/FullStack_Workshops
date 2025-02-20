@@ -46,3 +46,13 @@ fs.unlink('temp.txt', (err) => {
     } else
     console.log(`Tiedosto poistettu onnistuneesti!`);
 });
+
+// Hakemiston luominen
+
+fs.mkdir('testDir', { recursive: true }, (err) => {
+    if (err) {
+        console.error(err);
+        return;
+    } else
+    console.log(`Hakemisto luotu onnistuneesti!`);
+});
