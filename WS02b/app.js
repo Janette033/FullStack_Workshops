@@ -47,12 +47,22 @@ fs.unlink('temp.txt', (err) => {
     console.log(`Tiedosto poistettu onnistuneesti!`);
 });
 
-// Hakemiston luominen
+// Hakemiston luominen, muutetaan kommentiksi, jotta voidaan kokeilla hakemiston poistoa
 
-fs.mkdir('testDir', { recursive: true }, (err) => {
-    if (err) {
-        console.error(err);
-        return;
-    } else
-    console.log(`Hakemisto luotu onnistuneesti!`);
+//fs.mkdir('testDir', { recursive: true }, (err) => {
+    //if (err) {
+        //console.error(err);
+       // return;
+   // } else
+   // console.log(`Hakemisto luotu onnistuneesti!`);
+//});
+
+// Hakemiston poistaminen
+
+fs.rmdir('testDir', { recursive: true }, (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('Hakemisto poistettu onnistuneesti!');
+  }
 });
