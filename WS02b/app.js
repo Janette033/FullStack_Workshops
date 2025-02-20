@@ -66,3 +66,20 @@ fs.rmdir('testDir', { recursive: true }, (err) => {
     console.log('Hakemisto poistettu onnistuneesti!');
   }
 });
+
+// Tiedoston muutokset
+
+fs.watch('watch.txt', (eventType, filename) => {
+  if (filename) {
+    console.log(`Tiedosto watch.txt on muuttunut: ${eventType}`);
+  } else {
+    console.log('Tiedostoa ei löydetty');
+  }
+});
+
+console.log(`Seurataan tiedoston watch.txt muutoksia`);
+
+
+
+
+
