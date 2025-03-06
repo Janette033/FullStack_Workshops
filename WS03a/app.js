@@ -18,6 +18,8 @@ app.get('/services', (req, res) => {
     res.send('Services Page');
 });
 
+app.use(express.static('public')); 
+
 app.listen(port, () => {
     console.log(`Palvelin käynnissä osoitteessa http://localhost:${port}`);
 });
