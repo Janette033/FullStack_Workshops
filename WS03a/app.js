@@ -1,3 +1,4 @@
+/* Harjoitus 1 koodi
 const express = require('express')
 const app = express()
 const port = 3000;
@@ -23,3 +24,38 @@ app.use(express.static('public'));
 app.listen(port, () => {
     console.log(`Palvelin käynnissä osoitteessa http://localhost:${port}`);
 });
+*/
+
+// harjoitus 2, kaikille reiteille staattinen HTML-tiedosto
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = 3000;
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/services', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
+
+app.listen(port, () => {
+    console.log(`Palvelin käynnissä osoitteessa http://localhost:${port}`);
+});
+
+
+
+
