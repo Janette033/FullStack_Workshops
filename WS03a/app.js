@@ -43,5 +43,15 @@ app.listen(port, () => {
 });
 
 
+// Harjoitus 3
 
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+app.post('/submit', (req, res) => {
+    const requestBody = req.body;
+    console.log(requestBody);
+    res.json(requestBody);
+  });
 
