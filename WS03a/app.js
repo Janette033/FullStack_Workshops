@@ -55,3 +55,26 @@ app.post('/submit', (req, res) => {
     res.json(requestBody);
   });
 
+
+// Harjoitus 4 
+
+const loggerMiddleware = (req, res, next) => {
+    console.log(`Request Method: ${req.method}, Request URL: ${req.url}`);
+    next();
+  };
+
+const customHeaderMiddleware = (req, res, next) => {
+    if (!req.headers['x-custom-header']) {
+      res.status(400).json({ error: 'X-Custom-Header puuttuu'});
+      console.log('X-Custom-Header puuttuu')
+    } else {
+      next();
+    }
+  };
+
+app.use(loggerMiddleware);
+
+app.post('/testi', customHeaderMiddleware, (req, res) => {
+  const requestBody = req.body;
+  res.json(requestBody);
+});
