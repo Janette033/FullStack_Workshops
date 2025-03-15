@@ -1,6 +1,22 @@
 [
-    { "name": "Jaana", "age": 25, "city": "Tampere" },
-    { "name": "Janne", "age": 30, "city": "Helsinki" },
-    { "name": "Jemina", "age": 28, "city": "Turku" }
-  ]
-  
+  {
+    "name": "Jaana",
+    "age": 25,
+    "city": "Tampere"
+  },
+  {
+    "name": "Janne",
+    "age": 30,
+    "city": "Helsinki"
+  },
+  {
+    "name": "Jemina",
+    "age": 28,
+    "city": "Turku"
+  },
+  {
+    "name": "Matti",
+    "age": 40,
+    "city": "Pori"
+  }
+]
