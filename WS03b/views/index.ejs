@@ -5,5 +5,10 @@
 </head>
 <body>
     <h1><%= message %></h1>
+    <ul>
+        <% items.forEach(function(item) { %>
+          <li><%= item %></li>
+        <% }); %>
+    </ul>
 </body>
 </html>
