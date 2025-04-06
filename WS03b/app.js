@@ -6,7 +6,9 @@ const PORT = 3000;
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-    res.render('index', {message: 'Hello world!'});
+    const items = ['Kohta 1', 'Kohta 2', 'Kohta 3', 'Kohta 4'];
+    res.render('index', {message: 'Hello world!', items});
+
 });
 
 app.listen(PORT, () => {
