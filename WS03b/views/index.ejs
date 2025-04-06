@@ -16,6 +16,22 @@
           <li><%= item %></li>
         <% }); %>
     </ul>
+    <table border="1" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Nimi</th>
+            <th>Sähköposti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(function(user) { %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
     <%- include('_footer') %>
 </body>
 </html>
