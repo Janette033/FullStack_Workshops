@@ -6,6 +6,11 @@
 <body>
     <%- include('_header') %>
     <h1><%= message %></h1>
+    <% if (isLoggedIn) { %>
+        <p><strong>Olet kirjautunut sisään</strong></p>
+      <% } else { %>
+        <p><strong>Et ole kirjautunut sisään</strong></p>
+      <% } %>
     <ul>
          <% items.forEach(function(item) { %>
           <li><%= item %></li>
