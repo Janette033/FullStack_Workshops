@@ -7,7 +7,8 @@ app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
     const items = ['Kohta 1', 'Kohta 2', 'Kohta 3', 'Kohta 4'];
-    res.render('index', {message: 'Hello world!', items});
+    const isLoggedIn = false;
+    res.render('index', {message: 'Hello world!', items, isLoggedIn});
 
 });
 
