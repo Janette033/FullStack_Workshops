@@ -4,11 +4,13 @@
     <title>EJS esimerkki</title>
 </head>
 <body>
+    <%- include('_header') %>
     <h1><%= message %></h1>
     <ul>
-        <% items.forEach(function(item) { %>
+         <% items.forEach(function(item) { %>
           <li><%= item %></li>
         <% }); %>
     </ul>
+    <%- include('_footer') %>
 </body>
 </html>
