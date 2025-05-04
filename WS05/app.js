@@ -1,70 +1,74 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
+app.use(bodyParser.json());
 
-const collection = [
-    { id: 1, name: "Document A" },
-    { id: 2, name: "Document B" }
-];
+// Yhdistää MongoDB, poistettu käyttäjänimi ja salasana näkyvistä mutta yhteys on testattu onnistuneesti
+mongoose.connect("mongodb+srv://@cluster0.dydf9dt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+// Schema ja Model
+const DocumentSchema = new mongoose.Schema({
+    name: String,
+    content: String
+});
+const Document = mongoose.model("Document", DocumentSchema);
 
 // GET kaikki dokumentit
-app.get("/api/getall", (req, res) => {
-    res.json(collection);
+app.get("/api/getall", async (req, res) => {
+    const documents = await Document.find();
+    res.json(documents);
 });
 
-// GET 
-app.get("/documents/:id", (req, res) => {
-  const id = req.params.id;
-  const doc = collection.find(d => d.id == id);
-  if (doc) {
-    res.json(doc);
-  } else {
-    res.status(404).json({ error: "Ei löytynyt" });
-  }
-});
-
-// POST 
-app.post("/api/add", (req, res) => {
-    const newDocument = req.body;
-    if (!newDocument.id || !newDocument.name) {
-        return res.status(400).json({ error: "id ja name ovat pakollisia" });
-    }
-    const exists = collection.some(doc => doc.id == newDocument.id);
-    if (exists) {
-        return res.status(409).json({ error: "Dokumentti samalla ID:llä on jo olemassa" });
-    }
-    collection.push(newDocument);
-    res.status(201).json({ message: "Dokumentti lisätty", newDocument });
-});
-
-// PUT/PATCH 
-app.put("/api/update/:id", (req, res) => {
-    const { id } = req.params;
-    const index = collection.findIndex(doc => doc.id == id);
-    if (index !== -1) {
-        collection[index] = { ...collection[index], ...req.body };
-        res.json({ message: `Dokumentti ${id} päivitetty`, updated: collection[index] });
-    } else {
-        res.status(404).json({ error: "Ei löytynyt" });
+// GET
+app.get("/api/:id", async (req, res) => {
+    try {
+        const document = await Document.findById(req.params.id);
+        document ? res.json(document) : res.status(404).json({ error: "Ei löytynyt" });
+    } catch (error) {
+        res.status(400).json({ error: "Virheellinen ID-muoto" });
     }
 });
 
-// DELETE 
-app.delete("/api/delete/:id", (req, res) => {
-    const { id } = req.params;
-    const index = collection.findIndex(doc => doc.id == id);
-    if (index !== -1) {
-        collection.splice(index, 1);
-        res.json({ message: `Dokumentti ${id} poistettu` });
-    } else {
-        res.status(404).json({ error: "Ei löytynyt" });
+// POST
+app.post("/api/add", async (req, res) => {
+    const newDocument = new Document(req.body);
+    await newDocument.save();
+    res.status(201).json({ message: "Dokumentti luotu", newDocument });
+});
+
+// PUT
+app.put("/api/update/:id", async (req, res) => {
+    try {
+        const updatedDocument = await Document.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        updatedDocument ? res.json({ message: "Päivitetty onnistuneesti", updatedDocument }) :
+            res.status(404).json({ error: "Dokumenttia ei löytynyt" });
+    } catch (error) {
+        res.status(400).json({ error: "Virheellinen ID-muoto" });
     }
 });
 
-// Käynnistetään palvelin
+// DELETE
+app.delete("/api/delete/:id", async (req, res) => {
+    try {
+        const deletedDocument = await Document.findByIdAndDelete(req.params.id);
+        deletedDocument ? res.json({ message: "Poistettu onnistuneesti" }) :
+            res.status(404).json({ error: "Dokumenttia ei löytynyt" });
+    } catch (error) {
+        res.status(400).json({ error: "Virheellinen ID-muoto" });
+    }
+});
+
+// Käynnistä palvelin 
 app.listen(PORT, () => {
-    console.log(`Palvelin on käynnissä osoitteessa: http://localhost:${PORT}`);
+    console.log(`Palvelin käynissä osoitteessa: http://localhost:${PORT}`);
 });
+
+
 
