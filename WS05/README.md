@@ -6,9 +6,9 @@ Tietokannassa kukin kissarotu sisältää nimen, kuvauksen, alkuperän ja listan
 # API-reitit
 
 ## GET kaikki kissarodut
-URL: /api/getall
-Metodi: GET
-Vastaus:
+### URL: /api/getall
+### Metodi: GET
+### Vastaus:
 [
   {
     "_id": "665123abc123",
@@ -19,10 +19,10 @@ Vastaus:
   }
 ]
 ## GET yksi kissarotu
-URL: /api/:id
-Metodi: GET
-Parametrit: id – MongoDB ID
-Vastaus:
+### URL: /api/:id
+### Metodi: GET
+### Parametrit: id – MongoDB ID
+### Vastaus:
 {
   "_id": "665123abc123",
   "nimi": "Birma",
@@ -31,22 +31,22 @@ Vastaus:
   "värit": ["valkoinen", "ruskea"]
 }
 
-Virheellinen ID:
+### Virheellinen ID:
 {
   "error": "Virheellinen ID-muoto"
 }
 
 ## POST uusi kissarotu
-URL: /api/add
-Metodi: POST
-Body (JSON):
+### URL: /api/add
+### Metodi: POST
+### Body (JSON):
 {
   "nimi": "Persialainen",
   "kuvaus": "Pitkäkarvainen sisäkissa",
   "alkuperä": "Iran",
   "värit": ["valkoinen", "harmaa"]
 }
-Vastaus:
+### Vastaus:
 {
   "message": "Kissarotu luotu",
   "uusiKissarotu": {
@@ -55,19 +55,19 @@ Vastaus:
     ...
   }
 }
-Virheellinen syöte:
+### Virheellinen syöte:
 {
   "message": "Kaikki kentät ovat pakollisia ja värit-taulukon täytyy sisältää vähintään yksi arvo ja olla taulukko muodossa"
 }
 
 ## PUT päivitä kissarotu
-URL: /api/update/:id
-Metodi: PUT
-Body (JSON):
+### URL: /api/update/:id
+### Metodi: PUT
+### Body (JSON):
 {
   "kuvaus": "Päivitetty kuvaus"
 }
-Vastaus:
+### Vastaus:
 {
   "message": "Päivitetty onnistuneesti",
   "päivitettyKissarotu": {
@@ -75,19 +75,19 @@ Vastaus:
     "kuvaus": "Päivitetty kuvaus"
   }
 }
-Virheellinen ID:
+### Virheellinen ID:
 {
   "error": "Virheellinen ID-muoto"
 }
 
 ## DELETE kissarotu
-URL: /api/delete/:id
-Metodi: DELETE
-Vastaus:
+### URL: /api/delete/:id
+### Metodi: DELETE
+### Vastaus:
 {
   "message": "Poistettu onnistuneesti"
 }
-Virheellinen ID tai ei löydy:
+### Virheellinen ID tai ei löydy:
 {
   "error": "Kissarotu ei löytynyt"
 }
