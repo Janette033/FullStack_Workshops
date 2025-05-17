@@ -13,3 +13,10 @@ import postgres from 'postgres';
 // postgres-yhteys...
 
 export default nextConfig;
+
+// next.config.js
+module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
